@@ -131,7 +131,7 @@ Licensed under the MIT License.
 
 ## 👨‍💻 Author
 
-**Namespace:** `davidphtee`  
+**Name:** `David Tee`  
 **Class:** `Template`
 
 
