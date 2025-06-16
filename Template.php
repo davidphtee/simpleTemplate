@@ -1,6 +1,4 @@
 <?php
-namespace davidphtee;
-
 /**
  * Adapted from https://github.com/thinkphp/php-template-engine
  * 
