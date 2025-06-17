@@ -45,8 +45,6 @@ Create a `.tpl` file with moustache syntax:
 <?php
 require_once 'Template.php';
 
-use STEF\Utils\Template;
-
 // Create a template instance
 $template = new Template();
 
