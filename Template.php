@@ -21,6 +21,7 @@ class Template {
      * Set a template variable, including arrays that can be traversed within the template
      * @param  string $name
      * @param  mixed $value string, array, integer, decimal, boolean
+     * @Return void
      */
     function set($name, $value) {
         $this->vars[$name] = $value;
@@ -31,6 +32,7 @@ class Template {
      * create individual variables from an array of key:value pairs
      *
      * @param  array $list
+     * @Return void
      */
     function setArray($list) {
         if(!is_array($list)) {
@@ -47,6 +49,7 @@ class Template {
      * Open, update with variable contents, and return the template file.
      *
      * @param string $file - the template file name for which the code and variables will be replaced
+     * @Return string - the HTML output
      */
     function fetch($file) {
 
