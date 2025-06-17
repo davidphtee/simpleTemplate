@@ -1,6 +1,4 @@
 <?php
-namespace STEF\Utils;
-
 /**
  * Simple PHP template engine with moustache syntax.
  *
