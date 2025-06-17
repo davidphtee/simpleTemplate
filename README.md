@@ -1,132 +1,134 @@
-# 🚀 PHP Template Engine
 
-A simple, lightweight PHP template engine inspired by [thinkphp/php-template-engine](https://github.com/thinkphp/php-template-engine).
+# Simple PHP Template Engine
 
-**Key features:**
-- ✅ Double moustache `{{ $variable }}` — insert variable values.
-- ✅ Triple moustache `{{{ ... }}}` — execute raw PHP code.
-- ✅ Set single variables or arrays.
-- ✅ Zero dependencies.
+A lightweight PHP template engine with moustache syntax for easy variable insertion and PHP code execution within your HTML templates.
 
 ---
 
-## 📂 Installation
+## Features
 
-Just download `Template.php` and include it in your project:
+✅ **Moustache Syntax**
+
+- `{{ $variable }}` — Outputs a variable’s value  
+- `{{{ PHP code }}}` — Executes raw PHP code
+
+✅ **Development & Production Modes**
+
+- Development mode uses a temporary file for better error tracing.
+- Production mode uses `eval()` for faster rendering.
+
+✅ **Safe Variable Handling**
+
+- Variables are extracted safely.
+- Errors are handled gracefully with meaningful messages.
+
+---
+
+## Installation
+
+Simply include `Template.php` in your project.
 
 ```php
 require_once 'Template.php';
 ```
 
+---
 
-## 📄 Basic Usage
+## Usage
 
-### 1️⃣ Create a template file
+### 1️⃣ Create a Template instance
 
-Create a `.tpl` file with moustache syntax:
+```php
+$template = new Template(true); // `true` enables development mode
+```
 
-**`example.tpl`**
+---
+
+### 2️⃣ Set variables
+
+```php
+$template->set('title', 'Hello World');
+$template->setArray([
+    'name' => 'John',
+    'age' => 30
+]);
+```
+
+---
+
+### 3️⃣ Create a template file
+
+**example.tpl**
+
 ```html
 <h1>{{ $title }}</h1>
+<p>Name: {{ $name }}</p>
+<p>Age: {{ $age }}</p>
 
-<ul>
-  {{{ foreach ($items as $item): }}}
-    <li>{{ $item }}</li>
-  {{{ endforeach; }}}
-</ul>
+{{{ if($age >= 18): }}}
+<p>Access granted.</p>
+{{{ else: }}}
+<p>Access denied.</p>
+{{{ endif; }}}
 ```
 
 ---
 
-### 2️⃣ Render the template
+### 4️⃣ Render the template
 
-**`index.php`**
 ```php
-<?php
-require_once 'Template.php';
-
-// Create a template instance
-$template = new Template();
-
-// Set single variable
-$template->set('title', 'My Shopping List');
-
-// Or set multiple variables at once
-$template->setArray([
-    'items' => ['Apples', 'Bananas', 'Cherries']
-]);
-
-// Render and output the HTML
 echo $template->fetch('example.tpl');
 ```
 
-**Expected output:**
-```html
-<h1>My Shopping List</h1>
+---
 
-<ul>
-  <li>Apples</li>
-  <li>Bananas</li>
-  <li>Cherries</li>
-</ul>
-```
+## Configuration
+
+| Parameter | Description |
+|-----------|--------------|
+| `isDevelopment` | `true` (default): uses a temporary file for detailed error tracing. <br> `false`: uses `eval()` for faster rendering in production. |
 
 ---
 
-## ⚙️ API Reference
+## Class Reference
+
+### `__construct(bool $isDevelopment = true)`
+
+Create a new instance.  
+- `true` → development mode  
+- `false` → production mode
 
 ### `set(string $name, mixed $value)`
 
-Set a single variable for use in your template.
-
-```php
-$template->set('name', 'Alice');
-```
-
----
+Set a single variable.
 
 ### `setArray(array $list)`
 
 Set multiple variables at once.
 
-```php
-$template->setArray([
-    'name' => 'Alice',
-    'age' => 25
-]);
-```
-
----
-
 ### `fetch(string $file): string`
 
-Parse the template and return the final HTML output.
-
-```php
-$html = $template->fetch('mytemplate.tpl');
-echo $html;
-```
+Render the given template file with the current variables.
 
 ---
 
-## ⚠️ Notes & Tips
+## Error Handling
 
-- **Double moustache `{{ $var }}`**: outputs the variable value **without escaping** — use carefully if you output raw HTML.
-- **Triple moustache `{{{ ... }}}`**: runs PHP logic inside the template — for loops, conditionals, etc.
-- This engine is intentionally minimal — no layouts, includes, or caching by default. Extend as needed!
-
----
-
-## 📜 License
-
-Adapted from [thinkphp/php-template-engine](https://github.com/thinkphp/php-template-engine).  
-Licensed under the MIT License.
+- Throws `RuntimeException` if:
+  - The template file does not exist or is unreadable.
+  - An error occurs while rendering the template.
+- In development mode, the source file name and line numbers are preserved for easier debugging.
 
 ---
 
-## 👨‍💻 Author
+## License
 
-**Name:** `David Tee`  
-**Class:** `Template`
+MIT — use it freely!
 
+---
 
+## Author
+
+**Your Name**
+
+Feel free to open issues or submit pull requests for improvements.
