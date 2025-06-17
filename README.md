@@ -18,9 +18,6 @@ Just download `Template.php` and include it in your project:
 require_once 'Template.php';
 ```
 
-The class uses the namespace `STEF\Utils`.
-
----
 
 ## 📄 Basic Usage
 
