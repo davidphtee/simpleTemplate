@@ -129,6 +129,6 @@ MIT — use it freely!
 
 ## Author
 
-**Your Name**
+**David Tee**
 
 Feel free to open issues or submit pull requests for improvements.
